@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 
-const API_BASE = "http://localhost:4000/api"
+const API_BASE = "https://dommyhoopsbackend.onrender.com/api"
 const STORAGE_KEY = "dommyhoops_agent_tabs_v1"
 
 export default function AgentChat({

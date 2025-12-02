@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { ChevronLeft } from "lucide-react"
 
-const API_BASE = "http://localhost:4000/api"
+const API_BASE = "https://dommyhoopsbackend.onrender.com/api"
 
 // helpers
 function formatDate(iso) {

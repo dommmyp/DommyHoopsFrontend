@@ -6,7 +6,7 @@ import BoxScore from "./BoxScore"
 import PlayByPlay from "./PlayByPlay"
 import ShotChart from "./ShotChart"
 
-const API_BASE = "http://localhost:4000/api"
+const API_BASE = "https://dommyhoopsbackend.onrender.com/api"
 
 // helpers
 const unwrap = x =>
