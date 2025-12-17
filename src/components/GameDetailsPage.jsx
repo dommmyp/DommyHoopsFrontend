@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, Trophy } from "lucide-react"
 
 import BoxScore from "./BoxScore"
 import PlayByPlay from "./PlayByPlay"
 import ShotChart from "./ShotChart"
 
-const API_BASE = "https://dommyhoopsbackend.onrender.com/api"
+import { API_BASE } from "../globals";
 
 // helpers
 const unwrap = x =>
@@ -220,12 +220,19 @@ export default function GameDetailsPage({
   const renderAdvancedStats = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
       {/* Home team card */}
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+      <div 
+        className="rounded-xl shadow-xl overflow-hidden"
+      >
         <div
-          className="px-3 py-2 flex items-center justify-between bg-slate-50 border-b border-slate-200"
-          style={{ borderColor: `${colors1.primary}33` }}
+          className="px-4 py-3 flex items-center justify-between shadow-md"
+          style={{
+            background: `linear-gradient(90deg, ${colors1.primary} 0%, ${colors1.secondary} 100%)`,
+          }}
         >
-          <h4 className="font-semibold text-xs md:text-sm text-slate-900 tracking-tight">
+          <h4 
+            className="font-black text-sm uppercase tracking-wider"
+            style={{ color: colors1.text }}
+          >
             <Link
               to={`/team/${encodeURIComponent(colors1.name)}`}
               className="hover:underline"
@@ -233,23 +240,29 @@ export default function GameDetailsPage({
               {colors1.name}
             </Link>
           </h4>
-          <span className="text-[11px] text-slate-600">Home</span>
+          <span 
+            className="text-xs font-bold px-2 py-1 rounded-full"
+            style={{
+              backgroundColor: `${colors1.text}20`,
+              color: colors1.text,
+            }}
+          >
+            Home
+          </span>
         </div>
-        <div className="p-3">
-          {/* now 3 tiles: OffEff, DefEff, Overall Eff */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+        <div className="p-4 bg-white">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
             <div
-              className="text-center rounded-lg px-2 py-3 bg-slate-50 border border-slate-200"
-              style={{ borderColor: `${colors1.primary}25` }}
+              className="text-center rounded-xl px-3 py-4 shadow-lg"
+              style={{ 
+                background: `${colors1.primary}05`
+              }}
             >
-              <p
-                className="text-[10px] font-semibold uppercase tracking-wide mb-1"
-                style={{ color: colors1.primary }}
-              >
+              <p className="text-[10px] font-bold uppercase tracking-wide mb-2 text-slate-600">
                 Offensive efficiency
               </p>
               <p
-                className="text-xl font-bold leading-none"
+                className="text-2xl font-black leading-none"
                 style={{ color: colors1.primary }}
               >
                 {fmt1(data1?.off_eff)}
@@ -257,17 +270,16 @@ export default function GameDetailsPage({
             </div>
 
             <div
-              className="text-center rounded-lg px-2 py-3 bg-slate-50 border border-slate-200"
-              style={{ borderColor: `${colors1.primary}25` }}
+              className="text-center rounded-xl px-3 py-4 shadow-lg"
+              style={{ 
+                background: `${colors1.secondary}05`
+              }}
             >
-              <p
-                className="text-[10px] font-semibold uppercase tracking-wide mb-1"
-                style={{ color: colors1.primary }}
-              >
+              <p className="text-[10px] font-bold uppercase tracking-wide mb-2 text-slate-600">
                 Defensive efficiency
               </p>
               <p
-                className="text-xl font-bold leading-none"
+                className="text-2xl font-black leading-none"
                 style={{ color: colors1.primary }}
               >
                 {fmt1(data1?.def_eff)}
@@ -275,17 +287,16 @@ export default function GameDetailsPage({
             </div>
 
             <div
-              className="text-center rounded-lg px-2 py-3 bg-slate-50 border border-slate-200"
-              style={{ borderColor: `${colors1.primary}25` }}
+              className="text-center rounded-xl px-3 py-4 shadow-lg"
+              style={{ 
+                background: `${colors1.primary}05`
+              }}
             >
-              <p
-                className="text-[10px] font-semibold uppercase tracking-wide mb-1"
-                style={{ color: colors1.primary }}
-              >
+              <p className="text-[10px] font-bold uppercase tracking-wide mb-2 text-slate-600">
                 Efficiency margin
               </p>
               <p
-                className="text-xl font-bold leading-none"
+                className="text-2xl font-black leading-none"
                 style={{ color: colors1.primary }}
               >
                 {data1?.eff != null ? Number(data1.eff).toFixed(1) : "N/A"}
@@ -296,12 +307,19 @@ export default function GameDetailsPage({
       </div>
 
       {/* Away team card */}
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+      <div 
+        className="rounded-xl shadow-xl overflow-hidden"
+      >
         <div
-          className="px-3 py-2 flex items-center justify-between bg-slate-50 border-b border-slate-200"
-          style={{ borderColor: `${colors2.primary}33` }}
+          className="px-4 py-3 flex items-center justify-between shadow-md"
+          style={{
+            background: `linear-gradient(90deg, ${colors2.primary} 0%, ${colors2.secondary} 100%)`,
+          }}
         >
-          <h4 className="font-semibold text-xs md:text-sm text-slate-900 tracking-tight">
+          <h4 
+            className="font-black text-sm uppercase tracking-wider"
+            style={{ color: colors2.text }}
+          >
             <Link
               to={`/team/${encodeURIComponent(colors2.name)}`}
               className="hover:underline"
@@ -309,22 +327,29 @@ export default function GameDetailsPage({
               {colors2.name}
             </Link>
           </h4>
-          <span className="text-[11px] text-slate-600">Away</span>
+          <span 
+            className="text-xs font-bold px-2 py-1 rounded-full"
+            style={{
+              backgroundColor: `${colors2.text}20`,
+              color: colors2.text,
+            }}
+          >
+            Away
+          </span>
         </div>
-        <div className="p-3">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+        <div className="p-4 bg-white">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
             <div
-              className="text-center rounded-lg px-2 py-3 bg-slate-50 border border-slate-200"
-              style={{ borderColor: `${colors2.primary}25` }}
+              className="text-center rounded-xl px-3 py-4 shadow-lg"
+              style={{ 
+                background: `${colors2.primary}05`
+              }}
             >
-              <p
-                className="text-[10px] font-semibold uppercase tracking-wide mb-1"
-                style={{ color: colors2.primary }}
-              >
+              <p className="text-[10px] font-bold uppercase tracking-wide mb-2 text-slate-600">
                 Offensive efficiency
               </p>
               <p
-                className="text-xl font-bold leading-none"
+                className="text-2xl font-black leading-none"
                 style={{ color: colors2.primary }}
               >
                 {fmt1(data2?.off_eff)}
@@ -332,17 +357,16 @@ export default function GameDetailsPage({
             </div>
 
             <div
-              className="text-center rounded-lg px-2 py-3 bg-slate-50 border border-slate-200"
-              style={{ borderColor: `${colors2.primary}25` }}
+              className="text-center rounded-xl px-3 py-4 shadow-lg"
+              style={{ 
+                background: `${colors2.secondary}05`
+              }}
             >
-              <p
-                className="text-[10px] font-semibold uppercase tracking-wide mb-1"
-                style={{ color: colors2.primary }}
-              >
+              <p className="text-[10px] font-bold uppercase tracking-wide mb-2 text-slate-600">
                 Defensive efficiency
               </p>
               <p
-                className="text-xl font-bold leading-none"
+                className="text-2xl font-black leading-none"
                 style={{ color: colors2.primary }}
               >
                 {fmt1(data2?.def_eff)}
@@ -350,17 +374,16 @@ export default function GameDetailsPage({
             </div>
 
             <div
-              className="text-center rounded-lg px-2 py-3 bg-slate-50 border border-slate-200"
-              style={{ borderColor: `${colors2.primary}25` }}
+              className="text-center rounded-xl px-3 py-4 shadow-lg"
+              style={{ 
+                background: `${colors2.primary}05`
+              }}
             >
-              <p
-                className="text-[10px] font-semibold uppercase tracking-wide mb-1"
-                style={{ color: colors2.primary }}
-              >
+              <p className="text-[10px] font-bold uppercase tracking-wide mb-2 text-slate-600">
                 Efficiency margin
               </p>
               <p
-                className="text-xl font-bold leading-none"
+                className="text-2xl font-black leading-none"
                 style={{ color: colors2.primary }}
               >
                 {data2?.eff != null ? Number(data2.eff).toFixed(1) : "N/A"}
@@ -374,9 +397,17 @@ export default function GameDetailsPage({
 
   const renderBoxScore = () => (
     <div className="mt-4 space-y-3">
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
-        <div className="px-4 py-2.5 flex items-center justify-between bg-slate-50 border-b border-slate-200">
-          <h3 className="text-xs font-medium text-slate-800 uppercase tracking-wide">
+      <div className="bg-white border-2 border-blue-200 rounded-xl shadow-xl overflow-hidden">
+        <div 
+          className="px-4 py-3 flex items-center justify-between shadow-md"
+          style={{
+            background: `linear-gradient(90deg, ${colors1.primary} 0%, ${colors2.primary} 100%)`,
+          }}
+        >
+          <h3 
+            className="text-sm font-black uppercase tracking-widest"
+            style={{ color: readableTextColor(colors1.primary) }}
+          >
             Box score
           </h3>
         </div>
@@ -394,33 +425,33 @@ export default function GameDetailsPage({
   )
 
   return (
-    <div className="px-4 py-6 bg-slate-100">
+    <div className="px-4 py-6 min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50">
       <div className="max-w-7xl mx-auto space-y-4 pb-8">
         {/* Top bar */}
-        <div className="bg-white border border-slate-200 rounded-xl shadow-sm px-4 py-3 flex items-center justify-between gap-3">
+        <div className="bg-white rounded-xl shadow-lg px-5 py-4 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <button
               onClick={onBack}
-              className="inline-flex items-center text-xs font-medium text-slate-600 hover:text-blue-600"
+              className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-slate-600 hover:text-blue-600 transition-all hover:translate-x-1"
             >
               <ChevronLeft className="h-4 w-4 mr-1" />
               Rankings
             </button>
-            <div className="h-6 w-px bg-slate-200" />
+            <div className="h-8 w-px bg-slate-200" />
             <div>
-              <h1 className="text-sm md:text-base font-semibold text-slate-900">
-                Game analytics
+              <h1 className="text-base md:text-lg font-bold text-slate-900">
+                Game Analytics
               </h1>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-xs font-semibold text-slate-600">
                 {awayTeam} @ {homeTeam}
                 {dateStr ? ` · ${dateStr}` : ""}
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-[11px]">
+          <div className="flex items-center gap-2 text-xs">
             {status && (
-              <span className="px-2 py-1 rounded-full bg-slate-100 text-slate-700 font-medium">
+              <span className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 font-bold ">
                 {status}
               </span>
             )}
@@ -428,50 +459,74 @@ export default function GameDetailsPage({
         </div>
 
         {/* Scoreboard card */}
-        <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-4 md:p-5">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-3 text-sm font-semibold text-slate-800">
+        <div 
+          className="rounded-xl shadow-2xl p-5 md:p-6 relative overflow-hidden"
+          style={{
+            background: `linear-gradient(90, ${colors1.primary} 0%, ${colors2.primary} 100%)`,
+            borderColor: homeWon ? colors1.primary : colors2.primary,
+          }}
+        >
+          {/* Decorative background elements */}
+          <div 
+            className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl opacity-10"
+            style={{ background: homeWon ? colors1.primary : colors2.primary }}
+          />
+          <div 
+            className="absolute bottom-0 left-0 w-32 h-32 rounded-full blur-3xl opacity-10"
+            style={{ background: homeWon ? colors2.primary : colors1.primary }}
+          />
+
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 relative z-10">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3 text-sm font-semibold">
                 <Link
                   to={`/team/${encodeURIComponent(awayTeam)}`}
-                  className="text-lg md:text-xl font-semibold text-slate-900 hover:text-blue-700"
+                  className="text-xl md:text-2xl font-black hover:underline transition-colors"
+                  style={{ color: colors2.primary }}
                 >
                   {awayTeam}
                 </Link>
-                <span className="text-slate-400">@</span>
+                <span className="text-slate-400 font-bold">@</span>
                 <Link
                   to={`/team/${encodeURIComponent(homeTeam)}`}
-                  className="text-lg md:text-xl font-semibold text-slate-900 hover:text-blue-700"
+                  className="text-xl md:text-2xl font-black hover:underline transition-colors"
+                  style={{ color: colors1.primary }}
                 >
                   {homeTeam}
                 </Link>
               </div>
-              <div className="text-xs text-slate-500">
+              <div className="text-xs font-semibold text-slate-600">
                 {dateStr}
                 {venueStr ? ` · ${venueStr}` : ""}
               </div>
               {status && (
-                <div className="text-[11px] text-slate-500 uppercase tracking-wide mt-0.5">
+                <div className="text-xs font-bold uppercase tracking-wider mt-1 text-slate-500">
                   {status}
                 </div>
               )}
             </div>
 
             <div className="text-right">
-              <div className="text-3xl md:text-4xl font-extrabold text-slate-900">
+              <div className="text-4xl md:text-5xl font-black flex items-center justify-end gap-2">
+                {winnerName && (
+                  <Trophy 
+                    className="h-8 w-8 md:h-10 md:w-10" 
+                    style={{ color: homeWon ? colors1.primary : colors2.primary }}
+                  />
+                )}
                 {awayPts != null && homePts != null ? (
                   <span>
                     <span
                       style={{
-                        color: !homeWon ? colors2.primary : undefined,
+                        color: !homeWon ? colors2.primary : '#cbd5e1',
                       }}
                     >
                       {awayPts}
                     </span>
-                    <span className="text-slate-400 mx-1.5">-</span>
+                    <span className="text-slate-400 mx-2">-</span>
                     <span
                       style={{
-                        color: homeWon ? colors1.primary : undefined,
+                        color: homeWon ? colors1.primary : '#cbd5e1',
                       }}
                     >
                       {homePts}
@@ -481,7 +536,10 @@ export default function GameDetailsPage({
                   <span className="text-slate-600">{status || ""}</span>
                 )}
               </div>
-              <div className="text-xs text-slate-600 mt-1">
+              <div 
+                className="text-sm font-bold mt-2"
+                style={{ color: homeWon ? colors1.primary : colors2.primary }}
+              >
                 {resultStr || ""}
               </div>
             </div>
@@ -489,8 +547,8 @@ export default function GameDetailsPage({
         </div>
 
         {/* Tabs */}
-        <div className="bg-white border border-slate-200 rounded-xl shadow-sm px-3 pt-2 pb-0">
-          <nav className="-mb-px flex space-x-4 md:space-x-8 text-sm font-semibold">
+        <div className="bg-white border-2 border-slate-200 rounded-xl shadow-lg px-3 pt-3 pb-0">
+          <nav className="-mb-px flex space-x-4 md:space-x-8 text-sm font-bold">
             {[
               { id: "dashboard", label: "Dashboard" },
               { id: "box", label: "Box Score" },
@@ -500,14 +558,15 @@ export default function GameDetailsPage({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`whitespace-nowrap px-3 pb-2 pt-1 border-b-2 transition-colors ${
+                className={`whitespace-nowrap px-3 pb-3 pt-1 border-b-3 transition-all uppercase tracking-wide text-xs ${
                   activeTab === tab.id
-                    ? "text-slate-900"
+                    ? ""
                     : "border-transparent text-slate-500 hover:text-slate-700"
                 }`}
                 style={
                   activeTab === tab.id
                     ? {
+                        borderBottomWidth: '3px',
                         borderColor: colors1.primary,
                         color: colors1.primary,
                       }
@@ -525,13 +584,13 @@ export default function GameDetailsPage({
           <div className="mt-4 space-y-4">
             <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.2fr),minmax(0,1.4fr)] gap-4">
               <div>
-                <h3 className="text-sm font-semibold mb-2 text-slate-900 uppercase tracking-wide">
+                <h3 className="text-sm font-black mb-3 text-slate-900 uppercase tracking-widest">
                   Advanced stats
                 </h3>
                 {renderAdvancedStats()}
               </div>
 
-              <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-3">
+              <div className="bg-white border-2 border-slate-200 rounded-xl shadow-lg p-4">
                 <ShotChart
                   shots={shots}
                   homeTeam={homeTeam}
@@ -546,7 +605,7 @@ export default function GameDetailsPage({
               </div>
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-3">
+            <div className="bg-white border-2 border-slate-200 rounded-xl shadow-lg p-4">
               <PlayByPlay
                 pbp={pbp}
                 homeTeam={homeTeam}
@@ -561,7 +620,7 @@ export default function GameDetailsPage({
         {activeTab === "box" && renderBoxScore()}
 
         {activeTab === "pbp" && (
-          <div className="mt-4 bg-white border border-slate-200 rounded-xl shadow-sm p-3">
+          <div className="mt-4 bg-white border-2 border-slate-200 rounded-xl shadow-lg p-4">
             <PlayByPlay
               pbp={pbp}
               homeTeam={homeTeam}
@@ -573,7 +632,7 @@ export default function GameDetailsPage({
         )}
 
         {activeTab === "shots" && (
-          <div className="mt-4 bg-white border border-slate-200 rounded-xl shadow-sm p-3">
+          <div className="mt-4 bg-white border-2 border-slate-200 rounded-xl shadow-lg p-4">
             <ShotChart
               shots={shots}
               homeTeam={homeTeam}
@@ -591,4 +650,3 @@ export default function GameDetailsPage({
     </div>
   )
 }
-

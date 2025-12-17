@@ -29,7 +29,8 @@ import ScoutingReportPage from "./components/ScoutingReportPage"
 import PlayerDetailsPage from "./components/PlayerDetailsPage"
 import AgentChat from "./components/AgentChat"
 
-const API_BASE = "https://dommyhoopsbackend.onrender.com/api"
+import { API_BASE } from "./globals";
+
 const SIDEBAR_W_EXPANDED = 256
 const SIDEBAR_W_COLLAPSED = 72
 

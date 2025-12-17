@@ -9,7 +9,8 @@ import {
 } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
-const API_BASE = "https://dommyhoopsbackend.onrender.com/api"
+import { API_BASE } from "../globals";
+
 
 const RankingsPage = () => {
   const [year, setYear] = useState("2025")
